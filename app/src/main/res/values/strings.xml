@@ -22,4 +22,9 @@
 
     <string name="how_was_the_service">Tip Percentage</string>
     <string name="round_up_tip">Round up tip?</string>
+
+    <string name="author">An Bui</string>
+    <string name="first_image">Carina Nebula</string>
+    <string name="second_image">Stephan\'s Quintet</string>
+    <string name="year">2022</string>
 </resources>

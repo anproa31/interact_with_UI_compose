@@ -56,7 +56,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
-import kotlin.math.round
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +67,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TipTimeLayout()
+//                    TipTimeLayout()
+                    ArtSpaceApp()
                 }
             }
         }
@@ -76,102 +76,105 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TipTimeLayout() {
-    var amountInput by remember {
-        mutableStateOf("")
-    }
-    var tipInput by remember {
-        mutableStateOf("")
-    }
-    var roundUp by remember {
-        mutableStateOf(false)
-    }
-    val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount, tipPercent, roundUp)
+fun ArtSpaceApp(){}
 
-    Column(
-        modifier = Modifier
-            .padding(40.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = stringResource(R.string.calculate_tip),
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .align(alignment = Alignment.Start)
-        )
-        EditNumberField(
-            value = amountInput,
-            onValueChange = { amountInput = it },
-            label = R.string.bill_amount,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            leadingIcon = R.drawable.money,
-            modifier = Modifier
-                .padding(bottom = 32.dp)
-                .fillMaxWidth()
-        )
-        EditNumberField(
-            value = tipInput,
-            onValueChange = { tipInput = it },
-            label = R.string.how_was_the_service,
-            keyboardOptions = KeyboardOptions.Default.copy(
-              keyboardType = KeyboardType.Number,
-              imeAction = ImeAction.Done
-            ),
-            leadingIcon = R.drawable.percent,
-            modifier = Modifier
-                .padding(bottom = 32.dp)
-                .fillMaxWidth()
-        )
-        RoundTheTipRow(roundUp = roundUp, onRoundUpChanged = {roundUp = it}, modifier = Modifier.padding(bottom = 32.dp))
-        Text(
-            text = stringResource(R.string.tip_amount, tip),
-            style = MaterialTheme.typography.displaySmall
-        )
-        Spacer(modifier = Modifier.height(150.dp))
-    }
-}
+//@Composable
+//fun TipTimeLayout() {
+//    var amountInput by remember {
+//        mutableStateOf("")
+//    }
+//    var tipInput by remember {
+//        mutableStateOf("")
+//    }
+//    var roundUp by remember {
+//        mutableStateOf(false)
+//    }
+//    val amount = amountInput.toDoubleOrNull() ?: 0.0
+//    val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
+//    val tip = calculateTip(amount, tipPercent, roundUp)
+//
+//    Column(
+//        modifier = Modifier
+//            .padding(40.dp)
+//            .verticalScroll(rememberScrollState()),
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.Center
+//    ) {
+//        Text(
+//            text = stringResource(R.string.calculate_tip),
+//            modifier = Modifier
+//                .padding(bottom = 16.dp)
+//                .align(alignment = Alignment.Start)
+//        )
+//        EditNumberField(
+//            value = amountInput,
+//            onValueChange = { amountInput = it },
+//            label = R.string.bill_amount,
+//            keyboardOptions = KeyboardOptions.Default.copy(
+//                keyboardType = KeyboardType.Number,
+//                imeAction = ImeAction.Next
+//            ),
+//            leadingIcon = R.drawable.money,
+//            modifier = Modifier
+//                .padding(bottom = 32.dp)
+//                .fillMaxWidth()
+//        )
+//        EditNumberField(
+//            value = tipInput,
+//            onValueChange = { tipInput = it },
+//            label = R.string.how_was_the_service,
+//            keyboardOptions = KeyboardOptions.Default.copy(
+//              keyboardType = KeyboardType.Number,
+//              imeAction = ImeAction.Done
+//            ),
+//            leadingIcon = R.drawable.percent,
+//            modifier = Modifier
+//                .padding(bottom = 32.dp)
+//                .fillMaxWidth()
+//        )
+//        RoundTheTipRow(roundUp = roundUp, onRoundUpChanged = {roundUp = it}, modifier = Modifier.padding(bottom = 32.dp))
+//        Text(
+//            text = stringResource(R.string.tip_amount, tip),
+//            style = MaterialTheme.typography.displaySmall
+//        )
+//        Spacer(modifier = Modifier.height(150.dp))
+//    }
+//}
 
-@SuppressLint("UnrememberedMutableState")
-@Composable
-fun EditNumberField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    @StringRes label: Int,
-    @DrawableRes leadingIcon: Int,
-    keyboardOptions: KeyboardOptions,
-    modifier: Modifier = Modifier
-) {
-//    var amountInput: MutableState<String> = mutableStateOf("0")
-//    var amountInput = mutableStateOf("0")
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(stringResource(id = label)) },
-        singleLine = true,
-        keyboardOptions = keyboardOptions,
-        leadingIcon = { Icon(painter = painterResource(id = leadingIcon), contentDescription = null)},
-        modifier = modifier,
-    )
-}
+//@SuppressLint("UnrememberedMutableState")
+//@Composable
+//fun EditNumberField(
+//    value: String,
+//    onValueChange: (String) -> Unit,
+//    @StringRes label: Int,
+//    @DrawableRes leadingIcon: Int,
+//    keyboardOptions: KeyboardOptions,
+//    modifier: Modifier = Modifier
+//) {
+////    var amountInput: MutableState<String> = mutableStateOf("0")
+////    var amountInput = mutableStateOf("0")
+//    TextField(
+//        value = value,
+//        onValueChange = onValueChange,
+//        label = { Text(stringResource(id = label)) },
+//        singleLine = true,
+//        keyboardOptions = keyboardOptions,
+//        leadingIcon = { Icon(painter = painterResource(id = leadingIcon), contentDescription = null)},
+//        modifier = modifier,
+//    )
+//}
 
-@Composable
-fun RoundTheTipRow(modifier: Modifier = Modifier, roundUp: Boolean, onRoundUpChanged: (Boolean) -> Unit) {
-    Row(modifier = modifier
-        .fillMaxWidth()
-        .size(48.dp), verticalAlignment = Alignment.CenterVertically) {
-        Text(text = stringResource(id = R.string.round_up_tip))
-        Switch(modifier = modifier
-            .fillMaxWidth()
-            .wrapContentWidth(Alignment.End), checked = roundUp, onCheckedChange = onRoundUpChanged)
-    }
-}
+//@Composable
+//fun RoundTheTipRow(modifier: Modifier = Modifier, roundUp: Boolean, onRoundUpChanged: (Boolean) -> Unit) {
+//    Row(modifier = modifier
+//        .fillMaxWidth()
+//        .size(48.dp), verticalAlignment = Alignment.CenterVertically) {
+//        Text(text = stringResource(id = R.string.round_up_tip))
+//        Switch(modifier = modifier
+//            .fillMaxWidth()
+//            .wrapContentWidth(Alignment.End), checked = roundUp, onCheckedChange = onRoundUpChanged)
+//    }
+//}
 
 /**
  * Calculates the tip based on the user input and format the tip amount
@@ -186,10 +189,16 @@ internal fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Bo
     return NumberFormat.getCurrencyInstance().format(tip)
 }
 
+@VisibleForTesting
+internal fun calculateImage(currentImage: Int){
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun TipTimeLayoutPreview() {
     TipTimeTheme {
-        TipTimeLayout()
+//        TipTimeLayout()
+        ArtSpaceApp()
     }
 }

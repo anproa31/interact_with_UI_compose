@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+//https://github.com/gitlood/Art-Space
+//https://github.com/KartikG69/ArtSpaceApp
+//https://developer.android.com/codelabs/basic-android-kotlin-compose-art-space?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-3%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-art-space#0
 package com.example.tiptime
 
 import android.annotation.SuppressLint
@@ -20,43 +24,25 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.tiptime.ui.theme.TipTimeTheme
-import java.text.NumberFormat
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,8 +61,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun ArtSpaceApp(){}
 
 //@Composable
 //fun TipTimeLayout() {
@@ -181,18 +165,119 @@ fun ArtSpaceApp(){}
  * according to the local currency.
  * Example would be "$10.00".
  */
+//@VisibleForTesting
+//internal fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
+//    var tip = tipPercent / 100 * amount
+//    if (roundUp)
+//        tip = kotlin.math.ceil(tip)
+//    return NumberFormat.getCurrencyInstance().format(tip)
+//}
+
+@SuppressLint("MutableCollectionMutableState")
+@Composable
+fun ArtSpaceApp() {
+    var currentImage by remember {
+        mutableStateOf(mutableListOf(1, R.drawable.first, R.string.first_image_name, R.string.author, R.string.year))
+    }
+    fun nextButton() {
+        currentImage = handleNextButton(currentImage[0]) as MutableList<Int>
+    }
+
+    fun previousButton() {
+        currentImage = handlePreviousButton(currentImage[0]) as MutableList<Int>
+    }
+
+    Column {
+        ArtSpaceImage(painter = currentImage[1])
+        Row {
+            Button(onClick = {nextButton()} ) {
+                Text(text = stringResource(id = R.string.next))
+            }
+            Button(onClick = {previousButton()} ) {
+                Text(text = stringResource(id = R.string.previous))
+            }
+        }
+    }
+
+    
+}
+
+
+@Composable
+@SuppressLint("SupportAnnotationUsage")
+fun ArtSpaceImage(@DrawableRes painter: Int) {
+    Image(painter = painterResource(id = painter), contentDescription = null)
+}
+
+
+
+
 @VisibleForTesting
-internal fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
-    var tip = tipPercent / 100 * amount
-    if (roundUp)
-        tip = kotlin.math.ceil(tip)
-    return NumberFormat.getCurrencyInstance().format(tip)
+internal fun handleNextButton(
+    currentIndex: Int,
+): List<Int> {
+    val iList: MutableList<Int> = mutableListOf()
+    when(currentIndex) {
+        1 -> {
+            iList.clear()
+            iList.add(currentIndex + 1)
+            iList.add(R.drawable.second)
+            iList.add(R.string.second_image_name)
+            iList.add(R.string.author)
+            iList.add(R.string.year)
+        }
+        2 -> {
+            iList.clear()
+            iList.add(currentIndex + 1)
+            iList.add(R.drawable.third)
+            iList.add(R.string.third_image_name)
+            iList.add(R.string.author)
+            iList.add(R.string.year)
+        }
+        3 -> {
+            iList.clear()
+            iList.add(1)
+            iList.add(R.drawable.first)
+            iList.add(R.string.first_image_name)
+            iList.add(R.string.author)
+            iList.add(R.string.year)
+        }
+    }
+    return iList
 }
 
 @VisibleForTesting
-internal fun calculateImage(currentImage: Int){
-
+@SuppressLint("SupportAnnotationUsage")
+internal fun handlePreviousButton(
+    currentIndex: Int,
+): List<Int> {
+    val iList: MutableList<Int> = mutableListOf()
+    when(currentIndex) {
+        1 -> {
+            iList.add(3)
+            iList.add(R.drawable.third)
+            iList.add(R.string.third_image_name)
+            iList.add(R.string.author)
+            iList.add(R.string.year)
+        }
+        2 -> {
+            iList.add(currentIndex - 1)
+            iList.add(R.drawable.first)
+            iList.add(R.string.first_image_name)
+            iList.add(R.string.author)
+            iList.add(R.string.year)
+        }
+        3 -> {
+            iList.add(currentIndex - 1)
+            iList.add(R.drawable.second)
+            iList.add(R.string.second_image_name)
+            iList.add(R.string.author)
+            iList.add(R.string.year)
+        }
+    }
+    return iList
 }
+
 
 @Preview(showBackground = true)
 @Composable

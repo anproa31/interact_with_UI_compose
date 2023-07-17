@@ -24,7 +24,10 @@
     <string name="round_up_tip">Round up tip?</string>
 
     <string name="author">An Bui</string>
-    <string name="first_image">Carina Nebula</string>
-    <string name="second_image">Stephan\'s Quintet</string>
+    <string name="first_image_name">Carina Nebula</string>
+    <string name="second_image_name">Stephan\'s Quintet</string>
+    <string name="third_image_name">Southern Ring Nebula</string>
     <string name="year">2022</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 </resources>

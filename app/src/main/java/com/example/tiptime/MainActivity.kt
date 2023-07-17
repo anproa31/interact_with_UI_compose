@@ -254,6 +254,7 @@ internal fun handlePreviousButton(
     val iList: MutableList<Int> = mutableListOf()
     when(currentIndex) {
         1 -> {
+            iList.clear()
             iList.add(3)
             iList.add(R.drawable.third)
             iList.add(R.string.third_image_name)
@@ -261,6 +262,7 @@ internal fun handlePreviousButton(
             iList.add(R.string.year)
         }
         2 -> {
+            iList.clear()
             iList.add(currentIndex - 1)
             iList.add(R.drawable.first)
             iList.add(R.string.first_image_name)
@@ -268,6 +270,7 @@ internal fun handlePreviousButton(
             iList.add(R.string.year)
         }
         3 -> {
+            iList.clear()
             iList.add(currentIndex - 1)
             iList.add(R.drawable.second)
             iList.add(R.string.second_image_name)
